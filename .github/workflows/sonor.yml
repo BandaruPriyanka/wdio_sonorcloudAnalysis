@@ -25,14 +25,20 @@ jobs:
         run: sudo apt-get install jq
       - name: Check Quality Gate
         run: |
-           sleep 30
-           quality_gate_status=$(curl -s -u ${{ secrets.SONOR_TOKEN }}: \
-            "https://sonarcloud.io/api/qualitygates/project_status?projectKey=wdio_sonarcloudAnalysis" | jq -r .projectStatus.status)
-            if [ "$quality_gate_status" != "OK" ]; then
-            echo "Quality gate failed: $quality_gate_status"
-            exit 1
+           sleep 60
+           full_response=$(curl -s -u ${{ secrets.SONOR_TOKEN }}: \
+           "https://sonarcloud.io/api/qualitygates/project_status?projectKey=wdio_sonarcloudAnalysis")
+           echo "Full API response: $full_response"
+           quality_gate_status=$(echo $full_response | jq -r .projectStatus.status)
+           echo "Extracted quality gate status: $quality_gate_status"
+           if [ -z "$quality_gate_status" ] || [ "$quality_gate_status" == "null" ]; then
+           echo "Error: Failed to get a valid quality gate status"
+           exit 1
+           elif [ "$quality_gate_status" != "OK" ]; then
+           echo "Quality gate failed: $quality_gate_status"
+           exit 1
            else
-            echo "Quality gate passed: $quality_gate_status"
+           echo "Quality gate passed: $quality_gate_status"
            fi
         env:
           SONAR_TOKEN: ${{ secrets.SONOR_TOKEN }}
