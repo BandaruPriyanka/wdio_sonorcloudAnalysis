@@ -32,7 +32,6 @@ class WelcomePage {
   }
   async clickonAccount(){
     await this.clickEnterToAccountButton.click();
-    //const actualText=await this.getWelcomeText.getText();
   }
   async clickonregisterButton(){
     await this.RegisterBtn.click();

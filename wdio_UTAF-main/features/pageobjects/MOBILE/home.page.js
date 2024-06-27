@@ -56,7 +56,7 @@ class HomePage {
     await this.clickenterelement.setValue(mobiledata.searchItem);
     await this.enterelement1.click();
     // await this.clickNotification.click();
-    // await this.clickNotificationBack.click();
+    // await this.clickNotificationBack.click();    
     await this.selectelement.click();
 
   }

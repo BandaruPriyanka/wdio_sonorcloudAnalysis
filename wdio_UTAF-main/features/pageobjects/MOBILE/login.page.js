@@ -30,7 +30,6 @@ class LoginPage  {
     return $(this.locators[platform()].loginButton);
   }
   async login(username,password) {
-    // expect(await this.title.isDisplayed()).to.be.true;
    await this.getusernameField.setValue(username);
    await this.getpasswordField.setValue(password);
    await this.clickonLogin.click();

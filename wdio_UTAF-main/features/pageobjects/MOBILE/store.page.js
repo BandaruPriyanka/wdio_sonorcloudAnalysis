@@ -54,7 +54,6 @@ class StorePage {
   }
   async storepage(){
     await this.clickFavIcon.click();
-    // await driver.execute('mobile: scroll', { strategy: 'xpath', selector:storebtnxpath });
     await browser.pause(10000);
     await this.clickStoreBtn.click();
     await this.clickcloseWebBtn.click();
