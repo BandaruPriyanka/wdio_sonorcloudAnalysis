@@ -24,9 +24,15 @@ jobs:
 
       - name: Check Quality Gate
         run: |
-          sleep 30
-          quality_gate_status=$(curl -s -u ${{ secrets.SONOR_TOKEN }}: \
-            "https://sonarcloud.io/api/qualitygates/project_status?projectKey=wdio_sonarcloudAnalysis" | jq -r .projectStatus.status)
+         for i in {1..10}; do
+            quality_gate_status=$(curl -s -u ${{ secrets.SONOR_TOKEN }}: \
+              "https://sonarcloud.io/api/qualitygates/project_status?projectKey=wdio_sonarcloudAnalysis" | jq -r .projectStatus.status)
+            if [ "$quality_gate_status" != "NONE" ]; then
+              break
+            fi
+            echo "Quality gate status is NONE, waiting..."
+            sleep 30
+          done
           if [ "$quality_gate_status" != "OK" ]; then
             echo "Quality gate failed: $quality_gate_status"
             exit 1
