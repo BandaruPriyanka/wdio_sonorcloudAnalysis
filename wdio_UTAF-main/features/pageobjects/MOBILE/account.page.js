@@ -83,7 +83,7 @@ class AccountPage {
     await this.clickonLogout.scrollIntoView({ block: 'center', inline: 'center' });
     await this.clickonLogout.click();
     await this.confirmation.click();
-    // await this.confirmation.click();
+  
   }
 }
 module.exports = new AccountPage();
