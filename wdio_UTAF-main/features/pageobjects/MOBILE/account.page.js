@@ -78,7 +78,7 @@ class AccountPage {
     await this.closeEditingProfile.click();
     await this.Exitoption.click();
   }
-  async logOut {
+  async logOut() {
     await this.clickonLogout.scrollIntoView();
     await this.clickonLogout.scrollIntoView({ block: 'center', inline: 'center' });
     await this.clickonLogout.click();
