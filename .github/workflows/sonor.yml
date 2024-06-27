@@ -24,6 +24,7 @@ jobs:
 
       - name: Check Quality Gate
         run: |
+          sleep 30
           quality_gate_status=$(curl -s -u ${{ secrets.SONOR_TOKEN }}: \
             "https://sonarcloud.io/api/qualitygates/project_status?projectKey=wdio_sonarcloudAnalysis" | jq -r .projectStatus.status)
           if [ "$quality_gate_status" != "OK" ]; then
