@@ -13,7 +13,7 @@ const failedRequestsCounter = new Counter('failed_requests');
 const activeUsers = new Gauge('active_users');
 
 // Define options for the test
-export let options = {
+export const options = {
   stages: [
     // Ramp up to 50 virtual users over 15 seconds
     { duration: '15s', target: 50 },

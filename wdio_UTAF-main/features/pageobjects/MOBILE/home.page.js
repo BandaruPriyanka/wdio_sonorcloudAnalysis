@@ -47,9 +47,7 @@ class HomePage {
   get clickNotificationBack() {
     return $(this.locators[platform()].notificationBackIcon);
   }
-  get clickNotificationBack() {
-    return $(this.locators[platform()].notificationBackIcon);
-  }
+ 
   async itemSearch() {
     await browser.setTimeout({ implicit: 10000 });
     await this.searchelement.click();
